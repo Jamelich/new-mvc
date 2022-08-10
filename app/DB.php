@@ -8,7 +8,7 @@ class DB
 {
     protected $table;
     private $db;
-    private $array_products;
+    private $array_bd;
 
     // public function __construct(array $model = [])
     // {
@@ -27,9 +27,13 @@ class DB
     public function getAll()
     {
         $stmt = $this->db->query('SELECT * FROM ' . $this->table);
-        $this->array_products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $this->array_bd = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         // $this->array_products = $stmt->fetchAll();
-        return $this->array_products;
+        // return $this->array_bd;
+        echo $this->table;
+        echo '<br><pre>';
+        print_r($this->array_bd);
+        // var_dump($this->array_bd);
     }
 
     // public function getById(int $id): ?static
