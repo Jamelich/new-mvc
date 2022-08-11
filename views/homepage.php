@@ -1,4 +1,5 @@
 <?php include __DIR__ . '/header.php'; ?>
+<br>
 
 главная
 <br>
@@ -8,12 +9,12 @@
 
 <?php
 
-// foreach ($products as $item) {
-//     echo $item['id_product'];
-//     echo $item['name'] . ' - ';
-//     echo $item['price'];
-//     echo '<hr>';
-// } ?>
+foreach ($products as $item) {
+    echo $item['id_product'];
+    echo $item['name'] . ' - ';
+    echo $item['price'];
+    echo '<hr>';
+} ?>
 
 <br>
 

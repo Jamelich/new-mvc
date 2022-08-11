@@ -1,0 +1,10 @@
+        .main_menu_item {
+            /* float: left; */
+            /* margin: 3px; */
+            list-style: none;
+        }
+        
+        .nav_items {
+            display: flex;
+            justify-content: space-around;
+        }
