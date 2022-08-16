@@ -14,62 +14,47 @@
     <?php
 
     // var_dump($menus);
-    // echo '<pre>';
-    // print_r($menus);
-    // echo '</pre>';
 
-    // print_r(array_filter($menus, function($v, $k) {
-    //     // return $k == 'id_parent' && $v == 0;
-    //     return $k == '0';
-    // }, ARRAY_FILTER_USE_BOTH));
-
-    // echo '</pre>';
-
-
-    // function cmp_function($a, $b)
-    // {
-    //     return ($a['level'] > $b['level']);
-    // }
-    // uasort($menus, 'cmp_function');
-
-    $childrens = [];
-    foreach ($menus as $item) {
-        if ($item['id_parent'] > 0) {
-            $childrens[$item['id_menu_item']] = $item['id_parent'];;
-        }
+    // сортировка массива по level 
+    function cmp_function($a, $b)
+    {
+        return ($a['level'] > $b['level']);
     }
+    uasort($menus, 'cmp_function');
 
-    echo '<div class="nav"><ul class="nav_items">';
 
     foreach ($menus as $item) {
         if ($item['id_parent'] == 0) {
-            echo printItem($item, $items, $childrens);
+            echo '<li class="main_menu_item"><a href="' . $item['url'] . '">' . $item['name'] . '</a>';
+            search_child($item, $menus);
+            echo '</li>';
         }
-        // if (!$item["parent_id"]) echo printItem($item, $items, $childrens); // Выводим все элементы верхнего уровня
     }
 
-    echo '</ul></div>';
-
-    function printItem($item)
+    // функция поиска дочерних элементов
+    function search_child($parent_item, $array_child)
     {
-        echo '<li class="main_menu_item"><a href="' . $item['url'] . '">' . $item['name'] . '</a></li>';
+        $arr_child = $array_child; // копия массива для поиска дочерних элементов
+        $count_ch = 0;
+        foreach ($arr_child as $child) {
+            if ($parent_item['id_menu_item'] == $child['id_parent']) {
+                $count_ch++;
+            }
+        }
+
+        if ($count_ch > 0) {
+            echo '<ul class="sub_menu">';
+
+            foreach ($arr_child as $child) {
+                if ($parent_item['id_menu_item'] == $child['id_parent']) {
+                    echo '<li class="sum_menu_item"><a href="' . $child['url'] . '">' . $child['name'] . '</a>';
+                    search_child($child, $array_child);
+                }
+            }
+
+            echo '</ul>';
+        }
     }
-
-
-    // echo '<pre>';
-    // print_r($childrens);
-    // echo '</pre>';
-
-    // if ($item['id_parent'] == 0) {
-    //     echo $item['name'] . ' - ';
-    //     echo $item['url'];
-    // }
-
-    // foreach ($menus as $item1) {
-    //     echo $item1['id_menu_item'];
-    //     echo $item1['name'] . ' - ';
-    //     echo $item1['url'];
-    // } 
     ?>
 
     <hr>
