@@ -22,14 +22,18 @@
     }
     uasort($menus, 'cmp_function');
 
+    echo '<nav class="menu">';
+    echo '<ul class="menu__list">';
 
     foreach ($menus as $item) {
         if ($item['id_parent'] == 0) {
-            echo '<li class="main_menu_item"><a href="' . $item['url'] . '">' . $item['name'] . '</a>';
+            echo '<li><a class="menu__link" href="' . $item['url'] . '">' . $item['name'] . '</a>';
             search_child($item, $menus);
             echo '</li>';
         }
     }
+    echo '</ul>';
+    echo '</nav>';
 
     // функция поиска дочерних элементов
     function search_child($parent_item, $array_child)
@@ -43,11 +47,11 @@
         }
 
         if ($count_ch > 0) {
-            echo '<ul class="sub_menu">';
+            echo '<ul class="sub-menu__list">';
 
             foreach ($arr_child as $child) {
                 if ($parent_item['id_menu_item'] == $child['id_parent']) {
-                    echo '<li class="sum_menu_item"><a href="' . $child['url'] . '">' . $child['name'] . '</a>';
+                    echo '<li><a class="sub-menu__link" href="' . $child['url'] . '">' . $child['name'] . '</a>';
                     search_child($child, $array_child);
                 }
             }
